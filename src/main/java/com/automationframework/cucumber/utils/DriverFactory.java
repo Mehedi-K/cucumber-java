@@ -3,8 +3,12 @@ package com.automationframework.cucumber.utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.logging.Level;
 
 /**
  * Creates and tears down WebDriver instances. Thread-safe via a ThreadLocal
@@ -46,6 +50,9 @@ public final class DriverFactory {
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--remote-allow-origins=*");
+        LoggingPreferences logging = new LoggingPreferences();
+        logging.enable(LogType.BROWSER, Level.ALL);
+        options.setCapability("goog:loggingPrefs", logging);
         // NOTE: --disable-gpu is intentionally NOT set. With --headless=new it stops the
         // headless compositor from producing frames once the page has been idle for a
         // few seconds, which silently drops native WebDriver click input (the click

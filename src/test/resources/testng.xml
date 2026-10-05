@@ -1,5 +1,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="CucumberSuite" verbose="1" parallel="false">
+    <listeners>
+        <listener class-name="com.automationframework.cucumber.listeners.RetryTransformer"/>
+    </listeners>
     <test name="CucumberTests">
         <classes>
             <class name="com.automationframework.cucumber.runners.TestRunner"/>
